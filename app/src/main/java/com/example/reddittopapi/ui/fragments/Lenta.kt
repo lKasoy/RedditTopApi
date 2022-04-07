@@ -30,11 +30,9 @@ class Lenta : Fragment() {
         Log.d("test","dsadsadsa")
         Toast.makeText(context, "dsadasd", Toast.LENGTH_SHORT).show()
 
-        lentaViewModel.fetchData()
-
         lentaViewModel.kind.observe(viewLifecycleOwner, {
-            binding.txtKind.text = it.kind
-            Log.d("test", it.kind)
+            binding.txtKind.text = it[0].author
+            Log.d("test", it[0].title)
         })
     }
 }

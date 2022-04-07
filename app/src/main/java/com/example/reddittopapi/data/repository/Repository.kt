@@ -1,6 +1,30 @@
 package com.example.reddittopapi.data.repository
 
-class Repository(private val apiRepository: ApiRepository) {
+import android.util.Log
+import com.example.reddittopapi.data.entity.PublicationTable
+import com.example.reddittopapi.data.entity.PublicationTable.Companion.toDatabase
+import kotlinx.coroutines.flow.Flow
 
-    suspend fun getResponse() = apiRepository.getResponse()
+class Repository(
+    private val apiRepository: ApiRepository,
+    private val daoRepository: DaoRepository
+) {
+
+    private var isFirstResponse: Boolean = true
+
+    val posts: Flow<List<PublicationTable>> = daoRepository.getTenPosts()
+
+    suspend fun getResponse() {
+        try {
+            val response = apiRepository.getResponse()
+            val publications = toDatabase(response)
+            if (isFirstResponse) {
+                daoRepository.deleteAll()
+                isFirstResponse = false
+            }
+            daoRepository.add(publications)
+        } catch (e: Exception) {
+            Log.d("test", e.toString())
+        }
+    }
 }

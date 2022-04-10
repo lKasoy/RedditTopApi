@@ -6,9 +6,9 @@ import kotlinx.coroutines.flow.Flow
 
 class DaoRepository(private val daoPublication: DaoPublication) {
 
-    suspend fun add(publications: List<PublicationTable>) = daoPublication.add(publications)
+    fun add(publications: List<PublicationTable>) = daoPublication.add(publications)
 
-    suspend fun deleteAll() = daoPublication.deleteAll()
+    fun deleteAll() = daoPublication.deleteAll()
 
-    fun getTenPosts(): Flow<List<PublicationTable>> = daoPublication.getPosts()
+    fun getPosts(): Flow<List<PublicationTable>> = daoPublication.getPosts()
 }

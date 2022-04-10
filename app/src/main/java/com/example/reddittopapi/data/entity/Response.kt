@@ -15,7 +15,9 @@ data class Children(
 
 data class ChildrenData(
     val title: String,
+    val thumbnail: String,
     val created: Long,
     val author: String,
     val num_comments: Long,
+    val url: String
 )

@@ -16,6 +16,6 @@ interface DaoPublication {
     @Query("DELETE FROM reddit_publications")
     fun deleteAll()
 
-    @Query("SELECT * FROM reddit_publications LIMIT 10")
+    @Query("SELECT * FROM reddit_publications LIMIT 25")
     fun getPosts(): Flow<List<PublicationTable>>
 }

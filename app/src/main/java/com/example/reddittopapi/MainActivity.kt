@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.commit
 import androidx.fragment.app.add
-import com.example.reddittopapi.ui.fragments.Lenta
+import com.example.reddittopapi.ui.fragments.PublicationsFragment
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
     private fun initFragment(savedInstanceState: Bundle?) {
         if (savedInstanceState == null) {
             supportFragmentManager.commit {
-                add<Lenta>(R.id.container)
+                add<PublicationsFragment>(R.id.container)
                 setReorderingAllowed(true)
             }
         }

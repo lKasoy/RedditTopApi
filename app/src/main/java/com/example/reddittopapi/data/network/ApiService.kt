@@ -6,5 +6,5 @@ import retrofit2.http.Query
 
 interface ApiService {
     @GET("top.json")
-    suspend fun getResponse(): Response
+    suspend fun getRedditTopPublications(): Response
 }

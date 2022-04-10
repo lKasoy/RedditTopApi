@@ -12,11 +12,11 @@ class Repository(
 
     private var isFirstResponse: Boolean = true
 
-    val posts: Flow<List<PublicationTable>> = daoRepository.getTenPosts()
+    val posts: Flow<List<PublicationTable>> = daoRepository.getPosts()
 
     suspend fun getResponse() {
         try {
-            val response = apiRepository.getResponse()
+            val response = apiRepository.getRedditTopPublications()
             val publications = toDatabase(response)
             if (isFirstResponse) {
                 daoRepository.deleteAll()

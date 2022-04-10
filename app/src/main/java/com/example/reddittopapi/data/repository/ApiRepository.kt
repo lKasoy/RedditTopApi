@@ -4,6 +4,6 @@ import com.example.reddittopapi.data.network.ApiService
 
 class ApiRepository(private val apiService: ApiService) {
 
-    suspend fun getResponse() = apiService.getResponse()
+    suspend fun getRedditTopPublications() = apiService.getRedditTopPublications()
 }
 

@@ -7,7 +7,7 @@ import com.example.reddittopapi.data.network.ApiService
 import com.example.reddittopapi.data.repository.ApiRepository
 import com.example.reddittopapi.data.repository.DaoRepository
 import com.example.reddittopapi.data.repository.Repository
-import com.example.reddittopapi.ui.viewModels.LentaViewModel
+import com.example.reddittopapi.ui.viewModels.PublicationsViewModel
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
@@ -19,7 +19,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 val viewModelModule = module {
     viewModel {
-        LentaViewModel(get())
+        PublicationsViewModel(get())
     }
 }
 

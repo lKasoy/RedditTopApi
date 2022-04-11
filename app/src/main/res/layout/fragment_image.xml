@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="15dp"
+    android:orientation="vertical"
     tools:context=".ui.fragments.ImageFragment">
 
     <ProgressBar
         android:id="@+id/progress"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:visibility="invisible"/>
+        android:layout_height="wrap_content"
+        android:visibility="visible"/>
 
     <ImageView
         android:id="@+id/imdFullScreen"
@@ -24,4 +25,10 @@
         android:layout_height="wrap_content"
         android:textSize="20dp"/>
 
-</FrameLayout>
+    <Button
+        android:id="@+id/btnSaveImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save Image"/>
+
+</LinearLayout>

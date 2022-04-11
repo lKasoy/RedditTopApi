@@ -1,7 +1,6 @@
 package com.example.reddittopapi.data.repository
 
 import android.util.Log
-import android.widget.Toast
 import com.example.reddittopapi.data.entity.PublicationTable
 import com.example.reddittopapi.data.entity.PublicationTable.Companion.toDatabase
 import kotlinx.coroutines.flow.Flow
@@ -18,7 +17,6 @@ class Repository(
     val posts: Flow<List<PublicationTable>> = daoRepository.getPosts()
     val post = MutableSharedFlow<PublicationTable>()
 
-
     suspend fun getTop() {
         try {
             val response = apiRepository.getTopPublications(after)
@@ -34,15 +32,7 @@ class Repository(
         }
     }
 
-    suspend fun getSomePost(id: String)  {
+    suspend fun getSomePost(id: String) {
         post.emit(daoRepository.getSomePost(id))
     }
-
-//    suspend fun getTopAfter() {
-//        Log.d("test", "onEndReached")
-//        val response = apiRepository.getTopAfter(after!!)
-//        val publications = toDatabase(response)
-//        daoRepository.add(publications)
-//        after = publications[0].after
-//    }
 }

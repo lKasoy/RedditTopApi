@@ -2,9 +2,11 @@ package com.example.reddittopapi
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.commit
 import androidx.fragment.app.add
 import com.example.reddittopapi.ui.fragments.PublicationsFragment
+import java.util.jar.Manifest
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -12,6 +14,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         initFragment(savedInstanceState)
+
     }
 
     private fun initFragment(savedInstanceState: Bundle?) {

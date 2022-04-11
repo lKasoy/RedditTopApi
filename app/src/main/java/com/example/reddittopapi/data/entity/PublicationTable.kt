@@ -40,7 +40,6 @@ data class PublicationTable(
             }
         }
 
-
         private fun dateToHoursPassed(date: Long): String {
             val cal = Calendar.getInstance()
             return when (val hours = ((cal.timeInMillis / 1000 - date) / 3600).toInt()) {

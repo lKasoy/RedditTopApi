@@ -1,9 +1,11 @@
 package com.example.reddittopapi.ui.fragments
 
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.os.Environment
-import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +21,7 @@ import com.example.reddittopapi.ui.viewModels.ImageViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import java.io.File
-import kotlin.coroutines.coroutineContext
+import java.io.FileOutputStream
 
 class ImageFragment : Fragment() {
 
@@ -47,10 +49,37 @@ class ImageFragment : Fragment() {
                     binding.urlFullScreen.text = it.fullScreenUrl
                 }
                 else -> {
-                    showImage(it.fullScreenUrl)
+                    showImage(it.thumbnailUrl)
                 }
             }
         })
+    }
+
+    private fun saveImageToGallery() {
+
+        val bitmapDrawable: BitmapDrawable = binding.imdFullScreen.drawable as BitmapDrawable
+        val bitmap: Bitmap = bitmapDrawable.bitmap
+
+        var fileOutputStream: FileOutputStream? = null
+        val file: File = Environment.getExternalStorageDirectory()
+        val dir = File(file.absolutePath + "/MyPics")
+        dir.mkdirs()
+
+        val fileName: String = String.format("%d.jpg", System.currentTimeMillis())
+        val outFile = File(dir, fileName)
+        try {
+            fileOutputStream = FileOutputStream(outFile)
+        } catch (e: Exception) {
+            Log.d("test", e.toString())
+        }
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream)
+
+        try {
+            fileOutputStream?.flush()
+            fileOutputStream?.close()
+        } catch (e: Exception) {
+            Log.d("test", e.toString())
+        }
     }
 
     private fun showImage(url: String) {
@@ -79,5 +108,6 @@ class ImageFragment : Fragment() {
                 }
             })
             .into(binding.imdFullScreen)
+//        saveImageToGallery()
     }
 }

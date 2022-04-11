@@ -39,14 +39,4 @@ class PublicationsViewModel(private val repository: Repository) : ViewModel() {
             }
         }
     }
-
-//    fun getTop() {
-//        viewModelScope.launch(Dispatchers.IO) {
-//            try {
-//                repository.getTop()
-//            } catch (e: Exception) {
-//                Log.d("test", e.toString())
-//            }
-//        }
-//    }
 }

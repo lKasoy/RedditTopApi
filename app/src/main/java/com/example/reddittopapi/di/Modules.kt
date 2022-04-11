@@ -7,7 +7,6 @@ import com.example.reddittopapi.data.network.ApiService
 import com.example.reddittopapi.data.repository.ApiRepository
 import com.example.reddittopapi.data.repository.DaoRepository
 import com.example.reddittopapi.data.repository.Repository
-import com.example.reddittopapi.ui.fragments.ImageFragment
 import com.example.reddittopapi.ui.viewModels.ImageViewModel
 import com.example.reddittopapi.ui.viewModels.PublicationsViewModel
 import com.google.gson.FieldNamingPolicy
@@ -15,7 +14,6 @@ import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
-import org.koin.core.parameter.parametersOf
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

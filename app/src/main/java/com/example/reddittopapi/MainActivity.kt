@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
     private fun initFragment(savedInstanceState: Bundle?) {
         if (savedInstanceState == null) {
             supportFragmentManager.commit {
-                add<PublicationsFragment>(R.id.container)
+                add<PublicationsFragment>(R.id.container, "publicationsFragment")
                 setReorderingAllowed(true)
             }
         }

@@ -16,6 +16,11 @@ interface DaoPublication {
     @Query("DELETE FROM reddit_publications")
     fun deleteAll()
 
-    @Query("SELECT * FROM reddit_publications LIMIT 25")
+    @Query("SELECT * FROM reddit_publications")
     fun getPosts(): Flow<List<PublicationTable>>
+
+    @Query("SELECT * FROM reddit_publications where thumbnailUrl =:id")
+    fun getSomePost(id: String): PublicationTable
+
+
 }

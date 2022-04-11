@@ -5,13 +5,16 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.reddittopapi.constants.Constants.POST_PREFETCH_COUNT
 import com.example.reddittopapi.data.entity.PublicationTable
 import com.example.reddittopapi.databinding.FragmentPublicationItemBinding
 
-class PublicationAdapter() :
-    androidx.recyclerview.widget.ListAdapter<PublicationTable, PublicationAdapter.ViewHolder>(
-        DiffCallback
-    ) {
+class PublicationAdapter(
+    private val onCLick: (PublicationTable) -> Unit,
+    private val onEndReached: () -> Unit
+) : androidx.recyclerview.widget.ListAdapter<PublicationTable, PublicationAdapter.ViewHolder>(
+    DiffCallback
+) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = FragmentPublicationItemBinding.inflate(
@@ -22,22 +25,31 @@ class PublicationAdapter() :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val result: PublicationTable = currentList[position]
-        holder.bind(result)
+        holder.bind(result, onCLick)
+        if (position == itemCount - POST_PREFETCH_COUNT) {
+            onEndReached()
+        }
     }
-
 
     class ViewHolder(private val binding: FragmentPublicationItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(publicationTable: PublicationTable) {
+        fun bind(
+            publicationTable: PublicationTable,
+            onImageClick: (PublicationTable) -> Unit
+        ) {
             binding.apply {
                 authorAndHoursPassed.text =
                     publicationTable.author + publicationTable.passedTime
                 txtTitle.text = publicationTable.title
                 txtNumOfComments.text = publicationTable.numberOfComments
                 Glide.with(binding.root)
+                    .asBitmap()
                     .load(publicationTable.thumbnailUrl)
                     .into(imgThumbnail)
+                imgThumbnail.setOnClickListener {
+                    onImageClick(publicationTable)
+                }
             }
         }
     }
@@ -48,14 +60,15 @@ class PublicationAdapter() :
             oldItem: PublicationTable,
             newItem: PublicationTable
         ): Boolean {
-            return oldItem.thumbnailUrl == newItem.thumbnailUrl
+            return oldItem.fullScreenUrl == newItem.fullScreenUrl
         }
 
         override fun areContentsTheSame(
             oldItem: PublicationTable,
             newItem: PublicationTable
         ): Boolean {
-            return oldItem == newItem
+            return oldItem.thumbnailUrl == newItem.thumbnailUrl
         }
     }
 }
+

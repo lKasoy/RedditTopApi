@@ -14,6 +14,7 @@ import kotlin.math.roundToInt
 
 @Entity(tableName = "reddit_publications")
 data class PublicationTable(
+    val after: String,
     val author: String,
     val title: String,
     val passedTime: String,
@@ -21,20 +22,24 @@ data class PublicationTable(
     val thumbnailUrl: String,
     val fullScreenUrl: String,
     val numberOfComments: String,
+    val isVideo: Boolean,
 ) {
     companion object {
         fun toDatabase(response: Response): List<PublicationTable> {
             return response.data.children.map {
                 PublicationTable(
+                    after = response.data.after,
                     author = POSTED_BY_TXT + it.data.author + " ",
                     title = it.data.title,
                     passedTime = dateToHoursPassed(it.data.created),
                     thumbnailUrl = it.data.thumbnail,
                     fullScreenUrl = it.data.url,
-                    numberOfComments = convertComments(it.data.num_comments)
+                    numberOfComments = convertComments(it.data.num_comments),
+                    isVideo = it.data.is_video,
                 )
             }
         }
+
 
         private fun dateToHoursPassed(date: Long): String {
             val cal = Calendar.getInstance()
@@ -60,7 +65,7 @@ data class PublicationTable(
                     numberOfComments.toString() + COMMENTS_TXT
                 }
                 else -> {
-                    ((numberOfComments/100.0).roundToInt()/10.0).toString() + K_COMMENTS_TXT
+                    ((numberOfComments / 100.0).roundToInt() / 10.0).toString() + K_COMMENTS_TXT
                 }
             }
         }

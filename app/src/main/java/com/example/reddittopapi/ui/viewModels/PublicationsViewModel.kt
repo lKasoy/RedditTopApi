@@ -1,5 +1,6 @@
 package com.example.reddittopapi.ui.viewModels
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,6 +10,7 @@ import com.example.reddittopapi.data.repository.Repository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import java.lang.Exception
 
 class PublicationsViewModel(private val repository: Repository) : ViewModel() {
 
@@ -16,13 +18,17 @@ class PublicationsViewModel(private val repository: Repository) : ViewModel() {
     val kind: LiveData<List<PublicationTable>> = _kind
 
     init {
+        subscribe()
         fetchData()
     }
 
-    private fun fetchData() {
+    fun fetchData() {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.getResponse()
-            subscribe()
+            try {
+                repository.getTop()
+            } catch (e: Exception) {
+                Log.d("test", e.toString())
+            }
         }
     }
 
@@ -33,4 +39,14 @@ class PublicationsViewModel(private val repository: Repository) : ViewModel() {
             }
         }
     }
+
+//    fun getTop() {
+//        viewModelScope.launch(Dispatchers.IO) {
+//            try {
+//                repository.getTop()
+//            } catch (e: Exception) {
+//                Log.d("test", e.toString())
+//            }
+//        }
+//    }
 }

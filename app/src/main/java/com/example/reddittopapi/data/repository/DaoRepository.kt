@@ -11,4 +11,6 @@ class DaoRepository(private val daoPublication: DaoPublication) {
     fun deleteAll() = daoPublication.deleteAll()
 
     fun getPosts(): Flow<List<PublicationTable>> = daoPublication.getPosts()
+
+    fun getSomePost(id: String) = daoPublication.getSomePost(id)
 }

@@ -9,5 +9,7 @@ object Constants {
     const val HOUR_AGO_TXT = " hour ago"
     const val HOURS_AGO_TXT = " hours ago"
     const val DAYS_AGO_TXT = " days ago"
+    const val ID = "idUrl"
+    const val POST_PREFETCH_COUNT = 3
 
 }

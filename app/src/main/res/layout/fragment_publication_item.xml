@@ -9,7 +9,6 @@
     android:orientation="vertical"
     android:padding="5dp">
 
-
     <TextView
         android:id="@+id/authorAndHoursPassed"
         android:layout_width="match_parent"
@@ -18,12 +17,12 @@
 
     <TextView
         android:id="@+id/txtTitle"
-        android:textColor="@color/black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/black"
         android:textSize="20dp" />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/imgThumbnail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
